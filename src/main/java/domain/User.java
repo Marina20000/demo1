@@ -1,13 +1,13 @@
 package domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Builder
 @Getter
 @Setter
-public class User extends Dictionary{
+@EqualsAndHashCode
+@AllArgsConstructor
+public class User extends Dictionary {
     private String name;
     private String surname;
     private String lastname;
