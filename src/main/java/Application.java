@@ -1,10 +1,7 @@
-import domain.Id;
-import domain.MyAbstractClass;
-import domain.MyLambda;
-import domain.User;
+import domain.*;
 
 import java.util.*;
-import java.util.function.Function;
+import java.util.function.*;
 
 public class Application {
     public static void main(String... args) {
@@ -57,12 +54,29 @@ public class Application {
         };
         System.out.println(myAbstractClass.abstractMethod());
 
-        MyLambda myLambda = new MyLambda() {
-            @Override
-            public String doubleString(String arg) {
-                return arg + arg;
-            }
-        };
-        myLambda.doubleString("aa");
+        MyLambda myLambda = arg -> arg + arg;
+        myLambda.doubleString("a");
+
+        BiFunction<Integer, Integer, Integer> biFunction = (a, b) -> a + b;
+
+        Consumer<Integer> consumer = (Integer x) -> System.out.println(x);
+
+        BiConsumer<Integer, String> biConsumer = (Integer x, String y) -> System.out.println(x + " : " + y);
+
+        Predicate<String> predicate = (String s) -> s == null;
+
+        Optional<Department> optionalDepartment = Optional.of(new Employee())
+                .map(employee -> employee.getDepartment())
+                .filter(Objects::nonNull)
+                //.orElse(new Department("*****"))
+                .or(() -> Optional.of(new Department("*****")));
+        System.out.println(optionalDepartment.get().getName());
+
+        hashMap.entrySet().forEach(it -> System.out.println(it));
+        hashMap.entrySet().stream()
+                .map(it -> it.getKey() + " " + it.getValue())
+                .forEach(it -> System.out.println(it));
+        String filterExample = hashSet.stream().filter(it -> it.contains("a")).findAny().orElse("ccc");
+        System.out.println(filterExample);
     }
 }
